@@ -2,3 +2,4 @@
 
 require_relative '../lib/hogwarts'
 
+CLI.new.call
