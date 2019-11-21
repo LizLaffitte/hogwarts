@@ -4,7 +4,11 @@ class House
     def initialize(attributes)
         attributes.each do |key, value|
             self.send(("#{key}="), value)
-            @@all << self
         end
+        @@all << self
+    end
+
+    def self.all
+        @@all
     end
 end

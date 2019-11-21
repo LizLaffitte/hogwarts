@@ -14,6 +14,13 @@ class CLI
         puts "Hmm...difficult, very difficult..."
         puts "Where to put you?"
         Api.new.houses
+        list_houses
+        house_selection = gets.chomp
     end
+
+    def list_houses
+        House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
+    end
+
 
 end
