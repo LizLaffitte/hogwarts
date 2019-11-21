@@ -7,7 +7,7 @@ class Api
 
     def houses
         houses =  HTTParty.get(@base_route + "houses?" + @token)
-        houses
+        houses.each{|house_hash| House.new(house_hash)}
     end
 
 end
