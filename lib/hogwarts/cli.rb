@@ -15,12 +15,13 @@ class CLI
         puts "Where to put you?"
         user_house
         puts "There are four houses at the Hogwarts School of Witchcraft and Wizardry."
-        puts "Enter the name of a house to learn more about it:"
+        puts "Enter the name (or number) of a house to learn more about it,"
+        puts "or enter 'exit' to leave Hogwarts."
+        @your_api_instance.houses
         list_houses
-        #@input_house = gets.chomp.capitalize
-        puts "Excellent! Ten points to #{@user_house}!"
+        @input_house = gets.chomp.capitalize
+        #puts "Excellent! Ten points to #{@user_house}!"
         sleep 2
-        input = nil
         while input != "exit"
             input = list_top_menu_options
             case input
@@ -37,8 +38,9 @@ class CLI
     end
 
     def user_house
-        @user_house = Api.new.sorting_hat
-        puts @user_house
+        @your_api_instance = Api.new
+        @user_house = @your_api_instance.sorting_hat
+        puts "#{@user_house}!"
         sleep 1
     end
 
