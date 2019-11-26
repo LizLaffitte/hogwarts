@@ -13,21 +13,21 @@ class CLI
         sleep 1
         puts "Hmm...difficult, very difficult..."
         puts "Where to put you?"
-        Api.new.houses
+        user_house
+        puts "There are four houses at the Hogwarts School of Witchcraft and Wizardry."
+        puts "Enter the name of a house to learn more about it:"
         list_houses
-        @input_house = gets.chomp.capitalize
-        puts "Excellent! Ten points to #{@input_house}!"
+        #@input_house = gets.chomp.capitalize
+        puts "Excellent! Ten points to #{@user_house}!"
         sleep 2
         input = nil
         while input != "exit"
-            input = list_menu_options
+            input = list_top_menu_options
             case input
             when "house info"
                 house_info
-            when "housemates"
-                puts "Fellow #{input_house.capitalize}"
-            when "spells"
-                puts "spells"
+                puts "Where to now, brave young wizard?"
+                input = gets.chomp
             when "change house"
                 puts "change house"
             else
@@ -36,10 +36,16 @@ class CLI
         end
     end
 
-    def list_menu_options
+    def user_house
+        @user_house = Api.new.sorting_hat
+        puts @user_house
+        sleep 1
+    end
+
+    def list_top_menu_options
         puts "To learn more about your house, enter 'house info'."
-        puts "To see what other students are in your house, enter 'housemates'."
-        puts "To cast a spell, enter 'spells'."
+        #puts "To see what other students are in your house, enter 'housemates'."
+        #puts "To cast a spell, enter 'spells'."
         puts "To change your house, enter 'change house'."
         puts "To quit, type 'exit'."
         puts "What would you like to do?"    
@@ -51,10 +57,9 @@ class CLI
     end
 
     def house_info
-        #binding.pry
         my_house = House.find_house(@input_house)
         my_house.list_house_info
-        puts "Where to now, brave young wizard?"
+
     end
 
 end
