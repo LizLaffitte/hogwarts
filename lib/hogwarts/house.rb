@@ -21,5 +21,10 @@ class House
         puts "Head of House: #{self.headOfHouse}"
         puts "Founder: #{self.founder}"
         puts "Mascot: #{self.mascot.capitalize}"
+        puts "House Ghost: #{self.houseGhost}"
+        list_colors = self.colors.collect{|color| color.capitalize}.join(", ")
+        puts "Colors: #{list_colors}"
+        list_values = self.values.collect{|value| value.capitalize}.join(", ")
+        puts "Values: #{list_values}"
     end
 end
