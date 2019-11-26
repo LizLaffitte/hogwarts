@@ -15,15 +15,17 @@ class CLI
         puts "Where to put you?"
         sleep 2
         user_house
+        @your_api_instance.houses
         input = nil
-        while input != "exit"
+        while input != "exit" 
             list_houses
-            input = gets.chomp.capitalize
-            if House.find_house(input) == nil
+            input = gets.chomp.downcase
+            cap_input = input.capitalize
+            if House.find_house(cap_input) == nil && input != "exit"
                 puts "Have you been confunded? Try again."
-                break
             else 
-                house_info(input)
+                house_info(cap_input)
+                menu_options(cap_input)
             end
         end
         #puts "Excellent! Ten points to #{@user_house}!"
@@ -62,13 +64,17 @@ class CLI
         puts "There are four houses at the Hogwarts School of Witchcraft and Wizardry."
         puts "Enter the name of a house to learn more about it,"
         puts "or enter 'exit' to leave Hogwarts."
-        @your_api_instance.houses
         House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
     end
 
     def house_info(house)
-        my_house = House.find_house(@input_house)
+        my_house = House.find_house(house)
         my_house.list_house_info
     end
 
+    def menu_options(house)
+        puts "Where to now, wizard?"
+        puts "Enter 'houses' to see the list of Hogwart's houses,"
+        puts "or enter 'classmates' to see a list of students in #{house.capitalize}."
+    end
 end
