@@ -11,4 +11,15 @@ class House
     def self.all
         @@all
     end
+
+    def self.find_house(house_name)
+        all.find {|house| house.name == house_name}
+    end
+
+    def list_house_info
+        puts "The House of #{self.name}:"
+        puts "Head of House: #{self.headOfHouse}"
+        puts "Founder: #{self.founder}"
+        puts "Mascot: #{self.mascot.capitalize}"
+    end
 end
