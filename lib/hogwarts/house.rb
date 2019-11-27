@@ -1,5 +1,6 @@
 class House
     attr_accessor :name, :mascot, :_id, :headOfHouse, :houseGhost, :founder, :__v, :school, :members, :values, :colors
+    attr_reader :student_list
     @@all = []
     def initialize(attributes)
         attributes.each do |key, value|

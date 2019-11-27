@@ -17,17 +17,17 @@ class CLI
         user_house
         @your_api_instance.houses
         input = nil
-        while input != "Exit" 
-            list_houses
-
-            input = gets.chomp.capitalize
-            if House.find_house(input) == nil
-                puts "Have you been confunded? Try again."
-            else 
-                house_info(input)
-                input = menu_options(input)
-                if input.downcase == "classmates"
-                    list_classmates(input)
+        unless input == "Exit" #Unless the user types exit
+            list_houses #Show a list of the houses and gives top menu instructions
+            input = gets.chomp.capitalize #Get user input, capitalizes it
+            if House.find_house(input) == nil && input != "Exit" #If the input isn't the name of a house object, and isn't exit
+                puts "Have you been confunded? Try again." #Writes message to try again
+            else  #Otherwise
+                house_info(input) #Retrieves house info based on house name
+                selected_house = House.find_house(input)
+                input = menu_options(input) #Shows second level menu options, asks for input again 
+                if input.downcase == "classmates" #if user input is classmates
+                    list_classmates(selected_house) #List classmates in house -- but input would be classmates so that doesn't quite work
                 end
             end
         end
@@ -49,7 +49,7 @@ class CLI
     end
 
     def list_classmates(house)
-        puts "classmates"
+        puts "Students in #{house.name}:"
     end
 
     def house_info(house)
@@ -61,7 +61,7 @@ class CLI
         puts "Where to now, wizard?"
         puts "Enter 'houses' to see the list of Hogwart's houses,"
         puts "or enter 'classmates' to see a list of students in #{house.capitalize}."
-        input = gets.chomp
+        input = gets.chomp.downcase
     end
 
 
