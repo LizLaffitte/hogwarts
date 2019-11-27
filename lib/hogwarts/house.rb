@@ -1,10 +1,13 @@
 class House
-    attr_accessor :name, :mascot, :_id, :headOfHouse, :houseGhost, :founder, :__v, :school, :members, :values, :colors
+    attr_accessor :name, :mascot, :_id, :headOfHouse, :houseGhost, :founder, :__v, :school, :members, :values, :colors, :students
     @@all = []
+
     def initialize(attributes)
         attributes.each do |key, value|
             self.send(("#{key}="), value)
         end
+        @members = attributes.first(10)
+        @students = []
         @@all << self
     end
 
@@ -32,7 +35,9 @@ class House
         @student_api_call = Api.new
         self.members.first(10).each do |student_id|
             student_hash = @student_api_call.student(student_id)
-            Student.new(student_hash)
+            student = Student.new(student_hash)
+            student.house = self
+            self.students << student
         end
     end
 

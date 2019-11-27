@@ -51,7 +51,9 @@ class CLI
 
     def list_classmates(house)
         puts "Students in #{house.name}:"
-        house.add_students
+        if house.students = []
+            house.add_students
+        end
         binding.pry
     end
 

@@ -1,9 +1,15 @@
 class Student
     attr_accessor :_id, :name, :house, :school, :__v, :ministryOfMagic, :orderOfThePhoenix, :dumbledoresArmy, :deathEater, :bloodStatus, :species, :role, :date
-        @@all = []
+    @@all = []
+
     def initialize(attributes)
-        @id = attributes[:_id]
+        @id = attributes["_id"]
+        @name = attributes["name"]
         @@all << self
+    end
+
+    def self.all
+        @@all
     end
     
 end
