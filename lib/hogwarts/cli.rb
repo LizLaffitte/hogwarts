@@ -17,30 +17,20 @@ class CLI
         user_house
         @your_api_instance.houses
         input = nil
-        while input != "exit" 
+        while input != "Exit" 
             list_houses
-            input = gets.chomp.downcase
-            cap_input = input.capitalize
-            if House.find_house(cap_input) == nil && input != "exit"
+
+            input = gets.chomp.capitalize
+            if House.find_house(input) == nil
                 puts "Have you been confunded? Try again."
             else 
-                house_info(cap_input)
-                menu_options(cap_input)
+                house_info(input)
+                input = menu_options(input)
+                if input.downcase == "classmates"
+                    list_classmates(input)
+                end
             end
         end
-        #puts "Excellent! Ten points to #{@user_house}!"
-        # while input != "exit"
-        #     case input
-        #     when "house info"
-        #         house_info
-        #         puts "Where to now, brave young wizard?"
-        #         input = gets.chomp
-        #     when "change house"
-        #         puts "change house"
-        #     else
-        #         "Have you been confunded? Try again."
-        #     end
-        # end
     end
 
     def user_house
@@ -50,21 +40,16 @@ class CLI
         sleep 1
     end
 
-    # def list_top_menu_options
-    #     puts "To learn more about your house, enter 'house info'."
-    #     #puts "To see what other students are in your house, enter 'housemates'."
-    #     #puts "To cast a spell, enter 'spells'."
-    #     puts "To change your house, enter 'change house'."
-    #     puts "To quit, type 'exit'."
-    #     puts "What would you like to do?"    
-    #     input = gets.chomp.downcase
-    # end
 
     def list_houses
         puts "There are four houses at the Hogwarts School of Witchcraft and Wizardry."
         puts "Enter the name of a house to learn more about it,"
         puts "or enter 'exit' to leave Hogwarts."
         House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
+    end
+
+    def list_classmates(house)
+        puts "classmates"
     end
 
     def house_info(house)
@@ -76,5 +61,8 @@ class CLI
         puts "Where to now, wizard?"
         puts "Enter 'houses' to see the list of Hogwart's houses,"
         puts "or enter 'classmates' to see a list of students in #{house.capitalize}."
+        input = gets.chomp
     end
+
+
 end

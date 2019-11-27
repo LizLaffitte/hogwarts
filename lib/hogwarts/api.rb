@@ -14,6 +14,7 @@ class Api
         houses.each{|house_hash| House.new(house_hash)}
     end
 
+  
 
 
 end

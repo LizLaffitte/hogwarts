@@ -6,6 +6,7 @@ class House
             self.send(("#{key}="), value)
         end
         @@all << self
+        @student_ids = self.members
     end
 
     def self.all
@@ -27,4 +28,5 @@ class House
         list_values = self.values.collect{|value| value.capitalize}.join(", ")
         puts "Values: #{list_values}"
     end
+
 end
