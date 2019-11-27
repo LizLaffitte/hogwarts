@@ -5,6 +5,7 @@ class Student
     def initialize(attributes)
         @id = attributes["_id"]
         @name = attributes["name"]
+        
         @@all << self
     end
 

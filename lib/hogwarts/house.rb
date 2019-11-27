@@ -6,7 +6,6 @@ class House
         attributes.each do |key, value|
             self.send(("#{key}="), value)
         end
-        @members = attributes.first(10)
         @students = []
         @@all << self
     end
@@ -33,11 +32,19 @@ class House
 
     def add_students
         @student_api_call = Api.new
-        self.members.first(10).each do |student_id|
+        self.members.each do |student_id|
             student_hash = @student_api_call.student(student_id)
-            student = Student.new(student_hash)
-            student.house = self
-            self.students << student
+            if student_hash["role"] == "student"
+                student = Student.new(student_hash)
+                student.house = self
+                self.students << student
+            end
+        end
+    end
+
+    def list_students
+        self.students.each.with_index(1) do |student_obj, value|
+            puts "#{value}. #{student_obj.name}"
         end
     end
 
