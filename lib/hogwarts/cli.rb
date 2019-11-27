@@ -18,15 +18,14 @@ class CLI
         @your_api_instance.houses
         @selection = "Houses"
         while @selection != "Exit"
-            @selected_house = House.find_house(@selection)
             case @selection
             when "Houses"
                 list_houses
             when "Classmates"
-                binding.pry
                 list_classmates(@selected_house)
             when "Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"
                 house_info(@selection)
+                @selected_house = House.find_house(@selection)
                 @selected_house.add_students
                 puts "Where to now, wizard?"
                 puts "Enter 'houses' to see the list of Hogwart's houses,"
