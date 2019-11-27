@@ -25,7 +25,8 @@ class CLI
             else  #Otherwise
                 house_info(input) #Retrieves house info based on house name
                 selected_house = House.find_house(input)
-                input = menu_options(input) #Shows second level menu options, asks for input again 
+                selected_house.add_students
+                input = menu_options(selected_house) #Shows second level menu options, asks for input again 
                 if input.downcase == "classmates" #if user input is classmates
                     list_classmates(selected_house) #List classmates in house -- but input would be classmates so that doesn't quite work
                 end
@@ -50,6 +51,8 @@ class CLI
 
     def list_classmates(house)
         puts "Students in #{house.name}:"
+        house.add_students
+        binding.pry
     end
 
     def house_info(house)
@@ -60,8 +63,9 @@ class CLI
     def menu_options(house)
         puts "Where to now, wizard?"
         puts "Enter 'houses' to see the list of Hogwart's houses,"
-        puts "or enter 'classmates' to see a list of students in #{house.capitalize}."
-        input = gets.chomp.downcase
+        puts "or enter 'classmates' to see a list of students in #{house.name}."
+        input = gets.chomp.capitalize
+        input
     end
 
 

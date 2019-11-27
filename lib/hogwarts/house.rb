@@ -1,13 +1,11 @@
 class House
     attr_accessor :name, :mascot, :_id, :headOfHouse, :houseGhost, :founder, :__v, :school, :members, :values, :colors
-    attr_reader :student_list
     @@all = []
     def initialize(attributes)
         attributes.each do |key, value|
             self.send(("#{key}="), value)
         end
         @@all << self
-        @student_ids = self.members
     end
 
     def self.all
@@ -28,6 +26,14 @@ class House
         puts "Colors: #{list_colors}"
         list_values = self.values.collect{|value| value.capitalize}.join(", ")
         puts "Values: #{list_values}"
+    end
+
+    def add_students
+        @student_api_call = Api.new
+        self.members.first(10).each do |student_id|
+            student_hash = @student_api_call.student(student_id)
+            Student.new(student_hash)
+        end
     end
 
 end
