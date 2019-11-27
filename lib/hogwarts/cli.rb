@@ -16,21 +16,25 @@ class CLI
         sleep 2
         user_house
         @your_api_instance.houses
-        input = nil
-        unless input == "Exit" #Unless the user types exit
-            list_houses #Show a list of the houses and gives top menu instructions
-            input = gets.chomp.capitalize #Get user input, capitalizes it
-            if House.find_house(input) == nil && input != "Exit" #If the input isn't the name of a house object, and isn't exit
-                puts "Have you been confunded? Try again." #Writes message to try again
-            else  #Otherwise
-                house_info(input) #Retrieves house info based on house name
-                selected_house = House.find_house(input)
-                selected_house.add_students
-                input = second_menu_options(selected_house) #Shows second level menu options, asks for input again 
-                if input.downcase == "classmates" #if user input is classmates
-                    list_classmates(selected_house) #List classmates in house -- but input would be classmates so that doesn't quite work
-                end
+        @selection = "Houses"
+        while @selection != "Exit"
+            @selected_house = House.find_house(@selection)
+            case @selection
+            when "Houses"
+                list_houses
+            when "Classmates"
+                binding.pry
+                list_classmates(@selected_house)
+            when "Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"
+                house_info(@selection)
+                @selected_house.add_students
+                puts "Where to now, wizard?"
+                puts "Enter 'houses' to see the list of Hogwart's houses,"
+                puts "or enter 'classmates' to see a list of students in #{@selection}."
+            else
+                puts "Have you been confunded? Try again."
             end
+            @selection = gets.chomp.capitalize
         end
     end
 
@@ -55,6 +59,9 @@ class CLI
             house.add_students
         end
         house.list_students
+        puts "Where to now, wizard?"
+        puts "Enter a student's name to learn more about them,"
+        puts "or enter 'houses' to see the list of Hogwart's houses,"
     end
 
     def house_info(house)
@@ -62,15 +69,5 @@ class CLI
         my_house.list_house_info
     end
 
-    def second_menu_options(house)
-        puts "Where to now, wizard?"
-        puts "Enter 'houses' to see the list of Hogwart's houses,"
-        puts "or enter 'classmates' to see a list of students in #{house.name}."
-        input = gets.chomp.capitalize
-        input
-    end
-
-    def third_menu_options
-    end
 
 end
