@@ -11,8 +11,8 @@ class Api
         houses.each{|house_hash| House.new(house_hash)}
     end
 
-    def student(id)
-        student =  HTTParty.get(@@base_route + "characters/" + id + "/?" + @@token)
+    def character(id)
+        HTTParty.get(@@base_route + "characters/" + id + "/?" + @@token)
     end
 
 

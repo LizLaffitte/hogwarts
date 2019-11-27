@@ -1,12 +1,12 @@
 class House
-    attr_accessor :name, :mascot, :_id, :headOfHouse, :houseGhost, :founder, :__v, :school, :members, :values, :colors, :students
+    attr_accessor :name, :mascot, :_id, :headOfHouse, :houseGhost, :founder, :__v, :school, :members, :values, :colors, :characters
     @@all = []
 
     def initialize(attributes)
         attributes.each do |key, value|
             self.send(("#{key}="), value)
         end
-        @students = []
+        @characters = []
         @@all << self
     end
 
@@ -30,21 +30,19 @@ class House
         puts "Values: #{list_values}"
     end
 
-    def add_students
-        @student_api_call = Api.new
-        self.members.each do |student_id|
-            student_hash = @student_api_call.student(student_id)
-            if student_hash["role"] == "student"
-                student = Student.new(student_hash)
-                student.house = self
-                self.students << student
-            end
+    def add_characters
+        @character_api_call = Api.new
+        self.members.first(10).each do |char_id|
+            char_hash = @character_api_call.character(char_id)
+            character = Character.new(char_hash)
+                character.house = self
+                self.characters << character
         end
     end
 
-    def list_students
-        self.students.each.with_index(1) do |student_obj, value|
-            puts "#{value}. #{student_obj.name}"
+    def print_character_list
+        self.characters.each.with_index(1) do |char_obj, value|
+            puts "#{value}. #{char_obj.name}"
         end
     end
 

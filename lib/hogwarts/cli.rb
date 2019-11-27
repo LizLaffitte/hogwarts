@@ -21,15 +21,20 @@ class CLI
             case @selection
             when "Houses"
                 list_houses
-            when "Classmates"
-                list_classmates(@selected_house)
             when "Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"
                 house_info(@selection)
                 @selected_house = House.find_house(@selection)
-                @selected_house.add_students
+                @selected_house.add_characters
                 puts "Where to now, wizard?"
                 puts "Enter 'houses' to see the list of Hogwart's houses,"
-                puts "or enter 'classmates' to see a list of students in #{@selection}."
+                puts "or enter 'members' to see a list of #{@selection} members."
+            when "Members"
+                list_characters(@selected_house)
+                puts "Where to now, wizard?"
+                puts "Enter a member's number (1-10) to learn more about them,"
+                puts "or enter 'houses' to see the list of Hogwart's houses,"
+            when "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+                @selected_house.characters[@selection.to_i].character_info
             else
                 puts "Have you been confunded? Try again."
             end
@@ -52,15 +57,12 @@ class CLI
         House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
     end
 
-    def list_classmates(house)
-        puts "Students in #{house.name}:"
-        if house.students = []
-            house.add_students
+    def list_characters(house)
+        puts "Members of #{house.name}:"
+        if house.characters = []
+            house.add_characters
         end
-        house.list_students
-        puts "Where to now, wizard?"
-        puts "Enter a student's name to learn more about them,"
-        puts "or enter 'houses' to see the list of Hogwart's houses,"
+        house.print_character_list
     end
 
     def house_info(house)
