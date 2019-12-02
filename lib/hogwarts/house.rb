@@ -8,6 +8,7 @@ class House
         end
         @characters = []
         @@all << self
+        @colors.collect{|color| color.strip!}
     end
 
     def self.all
