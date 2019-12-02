@@ -4,7 +4,6 @@ require 'httparty'
 require_relative "hogwarts/cli"
 require_relative "hogwarts/api"
 require_relative "hogwarts/house"
-require_relative "hogwarts/member"
-require_relative "hogwarts/spell"
+require_relative "hogwarts/character"
 require_relative "hogwarts/spell"
 require_relative "hogwarts/version"

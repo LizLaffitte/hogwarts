@@ -7,14 +7,16 @@ class CLI
         sleep 1
         puts "I shall place the sorting hat on your head."
         sleep 1
-        puts "And you will be sorted into your houses."
+        puts "And you will be sorted into your house."
         sleep 1
         puts "Ah, right then..."
         sleep 1
         puts "Hmm...difficult, very difficult..."
+        sleep 1
         puts "Where to put you?"
         sleep 2
         user_house
+        sleep 1
         @your_api_instance.houses
         @selection = "Houses"
         while @selection != "Exit"
@@ -34,7 +36,10 @@ class CLI
                 puts "Enter a member's number (1-10) to learn more about them,"
                 puts "or enter 'houses' to see the list of Hogwart's houses,"
             when "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
-                @selected_house.characters[@selection.to_i].character_info
+                @selected_house.characters[(@selection.to_i) - 1].character_info
+                puts "Where to now, wizard?"
+                puts "Enter 'houses' to see the list of Hogwart's houses,"
+                puts "or enter 'members' to see a list of #{@selected_house.name} members."
             else
                 puts "Have you been confunded? Try again."
             end
@@ -46,7 +51,6 @@ class CLI
         @your_api_instance = Api.new
         @user_house = @your_api_instance.sorting_hat
         puts "#{@user_house}!"
-        sleep 1
     end
 
 
