@@ -18,8 +18,12 @@ class CLI
         user_house
         sleep 1
         @your_api_instance.houses
-        @selection = "Houses"
+        @selection = nil
         while @selection != "Exit"
+            puts "Where to now, wizard?"
+            puts "Enter 'houses' to see the list of Hogwart's houses,"
+            puts "enter 'students' to see a list of your fellow students,"
+            puts "or enter 'exit' to leave Hogwarts."
             case @selection
             when "Houses"
                 list_houses
@@ -27,9 +31,6 @@ class CLI
                 house_info(@selection)
                 @selected_house = House.find_house(@selection)
                 @selected_house.add_characters
-                puts "Where to now, wizard?"
-                puts "Enter 'houses' to see the list of Hogwart's houses,"
-                puts "or enter 'members' to see a list of #{@selection} members."
             when "Members"
                 list_characters(@selected_house)
                 puts "Where to now, wizard?"
@@ -56,9 +57,16 @@ class CLI
 
     def list_houses
         puts "There are four houses at the Hogwarts School of Witchcraft and Wizardry."
-        puts "Enter the name of a house to learn more about it,"
+        puts "Enter the number of a house to learn more about it,"
         puts "or enter 'exit' to leave Hogwarts."
         House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
+        selected_house_index = (gets.chomp.to_i) - 1
+        
+        if House.all.length > selected_house_index && selected_house_index > -1
+            house = House.all.sort_by(&:name)[selected_house_index]
+            house.list_house_info
+
+        end
     end
 
     def list_characters(house)
@@ -70,8 +78,7 @@ class CLI
     end
 
     def house_info(house)
-        my_house = House.find_house(house)
-        my_house.list_house_info
+        house.list_house_info
     end
 
 
