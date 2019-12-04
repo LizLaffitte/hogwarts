@@ -77,9 +77,6 @@ class CLI
         house.print_character_list
     end
 
-    def house_info(house)
-        house.list_house_info
-    end
 
 
 end
