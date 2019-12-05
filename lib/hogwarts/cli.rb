@@ -24,10 +24,11 @@ class CLI
             puts "Enter 'houses' to see the list of Hogwart's houses,"
             puts "enter 'students' to see a list of your fellow students,"
             puts "or enter 'exit' to leave Hogwarts."
+            @selection = gets.chomp.capitalize
             case @selection
             when "Back"
             when "Houses"
-                @selection = list_houses
+                list_houses
             when "Students"
                 list_characters(@selected_house)
                 puts "Where to now, wizard?"
@@ -41,7 +42,7 @@ class CLI
             else
                 puts "Have you been confunded? Try again."
             end
-            @selection = gets.chomp.capitalize
+            
         end
     end
 
@@ -55,21 +56,22 @@ class CLI
     def list_houses
         puts "There are four houses at the Hogwarts School of Witchcraft and Wizardry."
         user_input = nil
-        while user_input != "exit" && user_input != "back"
+        while user_input != "Exit"
             puts "Enter the number of a house to learn more about it,"
-            puts "enter 'back' to go back,"
             puts "or enter 'exit' to leave Hogwarts."
             House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
-            user_input = gets.chomp.downcase
+            user_input = gets.chomp.capitalize
             house_index = (user_input.to_i) - 1
-            if House.all.length > house_index && house_index > -1
+            if user_input == "Break"
+                break
+            elsif House.all.length > house_index && house_index > -1
                 house = House.all.sort_by(&:name)[house_index]
                 house.list_house_info
-            else
-                puts "Have you been confunded? Try again. Test"
+            else 
+                puts "Have you been confunded? Try again."
             end
         end
-        if user_input == "exit"
+        if user_input == "Exit"
             @selection = "Exit"
         end
     end
