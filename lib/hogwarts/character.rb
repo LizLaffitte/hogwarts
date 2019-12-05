@@ -2,6 +2,7 @@ class Character
     attr_accessor :patronus, :wand, :boggart, :house, :ministryOfMagic, :orderOfThePhoenix, :dumbledoresArmy, :deathEater, :bloodStatus, :species, :role, :date
     attr_reader :id, :name
     @@all = []
+    @@students = []
 
     def initialize(attributes)
         @id = attributes["_id"]
@@ -11,10 +12,17 @@ class Character
         @wand = attributes["wand"]
         @role = attributes["role"]
         @@all << self
+        if @role == "student"
+            @@students << self
+        end
     end
 
     def self.all
         @@all
+    end
+
+    def self.students
+        @@students
     end
 
     def character_info

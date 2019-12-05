@@ -16,30 +16,28 @@ class CLI
         puts "Where to put you?"
         sleep 2
         user_house
-        sleep 1
         @your_api_instance.houses
-        #Will instantiate characters here
         House.all.each{|house| house.add_characters}
-        @selection = "Start"
+        @selection = "Back"
         while @selection != "Exit"
             puts "Where to now, wizard?"
             puts "Enter 'houses' to see the list of Hogwart's houses,"
             puts "enter 'students' to see a list of your fellow students,"
             puts "or enter 'exit' to leave Hogwarts."
             case @selection
-            when "Start"
+            when "Back"
             when "Houses"
-                list_houses
+                @selection = list_houses
             when "Students"
                 list_characters(@selected_house)
                 puts "Where to now, wizard?"
                 puts "Enter a member's number (1-10) to learn more about them,"
                 puts "or enter 'houses' to see the list of Hogwart's houses,"
-            when "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
-                @selected_house.characters[(@selection.to_i) - 1].character_info
-                puts "Where to now, wizard?"
-                puts "Enter 'houses' to see the list of Hogwart's houses,"
-                puts "or enter 'members' to see a list of #{@selected_house.name} members."
+            # when "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
+            #     @selected_house.characters[(@selection.to_i) - 1].character_info
+            #     puts "Where to now, wizard?"
+            #     puts "Enter 'houses' to see the list of Hogwart's houses,"
+            #     puts "or enter 'members' to see a list of #{@selected_house.name} members."
             else
                 puts "Have you been confunded? Try again."
             end
@@ -56,22 +54,31 @@ class CLI
 
     def list_houses
         puts "There are four houses at the Hogwarts School of Witchcraft and Wizardry."
-        puts "Enter the number of a house to learn more about it,"
-        puts "or enter 'exit' to leave Hogwarts."
-        House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
-        selected_house_index = (gets.chomp.to_i) - 1
-        if House.all.length > selected_house_index && selected_house_index > -1
-            house = House.all.sort_by(&:name)[selected_house_index]
-            house.list_house_info
+        user_input = nil
+        while user_input != "exit" && user_input != "back"
+            puts "Enter the number of a house to learn more about it,"
+            puts "enter 'back' to go back,"
+            puts "or enter 'exit' to leave Hogwarts."
+            House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
+            user_input = gets.chomp.downcase
+            house_index = (user_input.to_i) - 1
+            if House.all.length > house_index && house_index > -1
+                house = House.all.sort_by(&:name)[house_index]
+                house.list_house_info
+            else
+                puts "Have you been confunded? Try again. Test"
+            end
+        end
+        if user_input == "exit"
+            @selection = "Exit"
         end
     end
 
-    def list_characters(house)
-        puts "Members of #{house.name}:"
-        if house.characters = []
-            house.add_characters
+    def list_random_students
+        puts "Here are some of your fellow students:"
+        Character.students.sample(10).with_index(1) do |student, idx| 
+            puts "#{idx}. #{student.name}"
         end
-        house.print_character_list
     end
 
 
