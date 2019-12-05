@@ -18,20 +18,19 @@ class CLI
         user_house
         sleep 1
         @your_api_instance.houses
-        @selection = nil
+        #Will instantiate characters here
+        House.all.each{|house| house.add_characters}
+        @selection = "Start"
         while @selection != "Exit"
             puts "Where to now, wizard?"
             puts "Enter 'houses' to see the list of Hogwart's houses,"
             puts "enter 'students' to see a list of your fellow students,"
             puts "or enter 'exit' to leave Hogwarts."
             case @selection
+            when "Start"
             when "Houses"
                 list_houses
-            when "Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"
-                house_info(@selection)
-                @selected_house = House.find_house(@selection)
-                @selected_house.add_characters
-            when "Members"
+            when "Students"
                 list_characters(@selected_house)
                 puts "Where to now, wizard?"
                 puts "Enter a member's number (1-10) to learn more about them,"
@@ -61,11 +60,9 @@ class CLI
         puts "or enter 'exit' to leave Hogwarts."
         House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
         selected_house_index = (gets.chomp.to_i) - 1
-        
         if House.all.length > selected_house_index && selected_house_index > -1
             house = House.all.sort_by(&:name)[selected_house_index]
             house.list_house_info
-
         end
     end
 
@@ -76,7 +73,6 @@ class CLI
         end
         house.print_character_list
     end
-
 
 
 end
