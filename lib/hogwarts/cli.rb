@@ -58,11 +58,12 @@ class CLI
         user_input = nil
         while user_input != "Exit"
             puts "Enter the number of a house to learn more about it,"
+            puts "enter 'back' to go back,"
             puts "or enter 'exit' to leave Hogwarts."
             House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
             user_input = gets.chomp.capitalize
             house_index = (user_input.to_i) - 1
-            if user_input == "Break"
+            if user_input == "Back"
                 break
             elsif House.all.length > house_index && house_index > -1
                 house = House.all.sort_by(&:name)[house_index]
