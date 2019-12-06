@@ -19,8 +19,8 @@ class CLI
         @your_api_instance.houses
         House.all.each{|house| house.add_characters}
         @selection = "back"
+        puts "Where to now, wizard? You are in the Great Hall."
         while @selection != "exit"
-            puts "Where to now, wizard?"
             puts "Enter 'houses' to see the list of Hogwart's houses,"
             puts "enter 'students' to see a list of your fellow students,"
             puts "or enter 'exit' to leave Hogwarts."
@@ -31,15 +31,11 @@ class CLI
                 list_houses
             when "students"
                 list_random_students
-                @student_selection = gets.chomp.downcase
-                puts "Where to now, wizard?"
-                puts "Enter a member's number (1-10) to learn more about them,"
-                puts "enter 'back' to go back,"
-                puts "or enter 'exit' to leave Hogwarts"
+                student_menu_options
             when "exit"
                 break
             else
-                puts "Have you been confunded? Try again. outer"
+                puts "Have you been confunded? Try again."
             end
             
         end
@@ -53,8 +49,8 @@ class CLI
 
 
     def list_houses
-        puts "There are four houses at the Hogwarts School of Witchcraft and Wizardry."
         user_input = nil
+        puts "Where to now, wizard? You are currently in the House Directory."
         while user_input != "exit"
             puts "Enter the number of a house to learn more about it,"
             puts "enter 'back' to go back,"
@@ -78,10 +74,34 @@ class CLI
 
     def list_random_students
         puts "Here are some of your fellow students:"
-        Character.students.sample(10).each.with_index(1) do |student, idx| 
+        @random_students = Character.students.sample(10)
+        @random_students.sort_by(&:name).each.with_index(1) do |student, idx| 
             puts "#{idx}. #{student.name}"
         end
     end
 
+    def student_menu_options
+        student_menu_input = nil
+        puts "Where to now, wizard? You are currently in the Student Directory."
+        while student_menu_input != "back"
+            puts "Enter a student's number (1-10) to learn more about them,"
+            puts "enter 'back' to go back,"
+            puts "or enter 'exit' to leave Hogwarts"
+            student_menu_input = gets.chomp.downcase
+            student_index = (student_menu_input.to_i) - 1
+            if student_menu_input == "exit"
+                @selection = "exit"
+                break
+            elsif student_menu_input == "back"
+                break
+            elsif Character.students.length > student_index && student_index > -1
+                student = @random_students.sort_by(&:name)[student_index]
+                student.character_info
+            else 
+                puts "Have you been confunded? Try again."
+            end
+        end
+
+    end
 
 end
