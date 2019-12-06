@@ -1,5 +1,5 @@
 class House
-    attr_accessor :name, :mascot, :_id, :headOfHouse, :houseGhost, :founder, :__v, :school, :members, :values, :colors, :characters
+    attr_accessor :name, :mascot, :headOfHouse, :houseGhost, :founder, :school, :members, :values, :colors, :characters
     @@all = []
 
     def initialize(attributes)

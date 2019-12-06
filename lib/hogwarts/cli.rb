@@ -30,7 +30,7 @@ class CLI
             when "Houses"
                 list_houses
             when "Students"
-                list_characters(@selected_house)
+                list_random_students
                 puts "Where to now, wizard?"
                 puts "Enter a member's number (1-10) to learn more about them,"
                 puts "or enter 'houses' to see the list of Hogwart's houses,"
@@ -39,8 +39,10 @@ class CLI
             #     puts "Where to now, wizard?"
             #     puts "Enter 'houses' to see the list of Hogwart's houses,"
             #     puts "or enter 'members' to see a list of #{@selected_house.name} members."
+            when "Exit"
+                break
             else
-                puts "Have you been confunded? Try again."
+                puts "Have you been confunded? Try again. outer"
             end
             
         end
@@ -65,6 +67,10 @@ class CLI
             house_index = (user_input.to_i) - 1
             if user_input == "Back"
                 break
+            elsif user_input == "Exit"
+                @selection = "Exit"
+            break
+
             elsif House.all.length > house_index && house_index > -1
                 house = House.all.sort_by(&:name)[house_index]
                 house.list_house_info
@@ -72,14 +78,11 @@ class CLI
                 puts "Have you been confunded? Try again."
             end
         end
-        if user_input == "Exit"
-            @selection = "Exit"
-        end
     end
 
     def list_random_students
         puts "Here are some of your fellow students:"
-        Character.students.sample(10).with_index(1) do |student, idx| 
+        Character.students.sample(10).each.with_index(1) do |student, idx| 
             puts "#{idx}. #{student.name}"
         end
     end
