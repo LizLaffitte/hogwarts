@@ -18,28 +18,25 @@ class CLI
         user_house
         @your_api_instance.houses
         House.all.each{|house| house.add_characters}
-        @selection = "Back"
-        while @selection != "Exit"
+        @selection = "back"
+        while @selection != "exit"
             puts "Where to now, wizard?"
             puts "Enter 'houses' to see the list of Hogwart's houses,"
             puts "enter 'students' to see a list of your fellow students,"
             puts "or enter 'exit' to leave Hogwarts."
-            @selection = gets.chomp.capitalize
+            @selection = gets.chomp.downcase
             case @selection
-            when "Back"
-            when "Houses"
+            when "back"
+            when "houses"
                 list_houses
-            when "Students"
+            when "students"
                 list_random_students
+                @student_selection = gets.chomp.downcase
                 puts "Where to now, wizard?"
                 puts "Enter a member's number (1-10) to learn more about them,"
-                puts "or enter 'houses' to see the list of Hogwart's houses,"
-            # when "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"
-            #     @selected_house.characters[(@selection.to_i) - 1].character_info
-            #     puts "Where to now, wizard?"
-            #     puts "Enter 'houses' to see the list of Hogwart's houses,"
-            #     puts "or enter 'members' to see a list of #{@selected_house.name} members."
-            when "Exit"
+                puts "enter 'back' to go back,"
+                puts "or enter 'exit' to leave Hogwarts"
+            when "exit"
                 break
             else
                 puts "Have you been confunded? Try again. outer"
@@ -58,19 +55,18 @@ class CLI
     def list_houses
         puts "There are four houses at the Hogwarts School of Witchcraft and Wizardry."
         user_input = nil
-        while user_input != "Exit"
+        while user_input != "exit"
             puts "Enter the number of a house to learn more about it,"
             puts "enter 'back' to go back,"
             puts "or enter 'exit' to leave Hogwarts."
             House.all.sort_by(&:name).each.with_index(1){|house, idx| puts "#{idx}. #{house.name}"}
-            user_input = gets.chomp.capitalize
+            user_input = gets.chomp.downcase
             house_index = (user_input.to_i) - 1
-            if user_input == "Back"
+            if user_input == "back"
                 break
-            elsif user_input == "Exit"
-                @selection = "Exit"
-            break
-
+            elsif user_input == "exit"
+                @selection = "exit"
+                break
             elsif House.all.length > house_index && house_index > -1
                 house = House.all.sort_by(&:name)[house_index]
                 house.list_house_info

@@ -16,7 +16,7 @@ class Api
     end
 
     def character(id)
-        HTTParty.get(@@base_route + "characters/" + id + "/?" + @@token)
+        char_hash = HTTParty.get(@@base_route + "characters/" + id + "/?" + @@token)
     end
 
 
