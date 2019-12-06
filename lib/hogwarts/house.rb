@@ -34,10 +34,9 @@ class House
     def add_characters
         @character_api_call = Api.new
         self.members.first(10).each do |char_id|
-            char_hash = @character_api_call.character(char_id)
-            character = Character.new(char_hash)
-                character.house = self
-                self.characters << character
+            character = @character_api_call.character(char_id)
+            character.house = self
+            self.characters << character
         end
     end
 
