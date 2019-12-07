@@ -11,13 +11,11 @@ Click the green Clone or Download button. Click the clipboard icon to copy the r
 In terminal, type the command git clone, and then paste the copied URL:
 ```
 git clone git@github.com:LizLaffitte/hogwarts.git
-
 ```
 Use the cd command in the terminal to open the hogwarts directory
 
 ```
 cd hogwarts
-
 ```
 Install the dependencies by typing this command into the terminal:
 
@@ -27,7 +25,11 @@ bundle install
 
 ## Usage
 
-To run the Hogwarts CLI gem, typw
+To run the Hogwarts CLI gem, type the following command: 
+```
+bin/run
+```
+You can now follow the prompts to be sorted into a house, and learn more about all of Hogwart's houses and your fellow classmates. 
 
 ## Development
 
@@ -37,11 +39,14 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/hogwarts. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/lizlaffitte/hogwarts. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](https://github.com/LizLaffitte/hogwarts/blob/master/CODE_OF_CONDUCT.md) code of conduct.
+
+
+Looking for a specific way to contribute? How about allowing users to see a list of professors, or house ghosts? Good luck, wizards!
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [MIT License](https://github.com/LizLaffitte/hogwarts/blob/master/LICENSE.txt).
 
 ## Code of Conduct
 
