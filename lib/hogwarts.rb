@@ -1,4 +1,3 @@
-require 'pry'
 require 'httparty'
 
 require_relative "hogwarts/cli"

@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Liz Laffitte"]
   spec.email         = ["laffitte.digital@gmail.com"]
 
-  spec.summary       = "CLI gem project for Flatiron by Liz Laffitte"
+  spec.summary       = "CLI gem project for Flatiron by Liz Laffitte."
   spec.description   = "This CLI gem sorts users in a Hogwarts house and then lets them request information about the houses and fellow students."
   spec.homepage      = "https://github.com/LizLaffitte/hogwarts"
   spec.license       = "MIT"
