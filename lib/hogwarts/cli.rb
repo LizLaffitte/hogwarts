@@ -19,8 +19,8 @@ class CLI
         @your_api_instance.houses
         House.all.each{|house| house.add_characters}
         @selection = "back"
-        puts "Where to now, wizard? You are in the Great Hall."
         while @selection != "exit"
+            puts "You are in the Great Hall. Where to now, wizard?"
             puts "Enter 'houses' to see the list of Hogwart's houses,"
             puts "enter 'students' to see a list of your fellow students,"
             puts "or enter 'exit' to leave Hogwarts."
@@ -50,8 +50,8 @@ class CLI
 
     def list_houses
         user_input = nil
-        puts "Where to now, wizard? You are currently in the House Directory."
         while user_input != "exit"
+            puts "You are currently in the House Directory. Where to now, wizard?"
             puts "Enter the number of a house to learn more about it,"
             puts "enter 'back' to go back,"
             puts "or enter 'exit' to leave Hogwarts."

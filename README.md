@@ -6,11 +6,9 @@ Welcome to the Hogwarts gem! This Ruby gem transports you to the Hogwarts School
 
 Navigate to the repo on GitHub: https://github.com/LizLaffitte/hogwarts
 
-Click the green Clone or Download button.
+Click the green Clone or Download button. Click the clipboard icon to copy the remote URL.
 
-Click the clipboard icon to copy the remote URL.
-
-In terminal, type the command
+In terminal, type the command git clone, and then paste the copied URL:
 ```
 git clone git@github.com:LizLaffitte/hogwarts.git
 

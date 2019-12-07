@@ -2,7 +2,7 @@
 
 require "bundler/setup"
 require "hogwarts"
-require "pry"
+
 
 require "irb"
 IRB.start(__FILE__)
