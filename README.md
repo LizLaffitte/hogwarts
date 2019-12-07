@@ -1,8 +1,6 @@
 # Hogwarts
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/hogwarts`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to the Hogwarts gem! This Ruby gem transports you to the Hogwarts School for Witchcraft and Wizardry. You will be sorted into a house and be able to learn more about the houses of Hogwarts and your fellow students.
 
 ## Installation
 

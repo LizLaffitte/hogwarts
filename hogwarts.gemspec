@@ -5,7 +5,7 @@ require "hogwarts/version"
 Gem::Specification.new do |spec|
   spec.name          = "hogwarts"
   spec.version       = Hogwarts::VERSION
-  spec.authors       = ["laffitte.digital@gmail.com"]
+  spec.authors       = ["Liz Laffitte"]
   spec.email         = ["laffitte.digital@gmail.com"]
 
   spec.summary       = "CLI gem project for Flatiron by Liz Laffitte"
