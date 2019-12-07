@@ -4,19 +4,23 @@ Welcome to the Hogwarts gem! This Ruby gem transports you to the Hogwarts School
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Navigate to the repo on GitHub: https://github.com/LizLaffitte/hogwarts
 
-```ruby
-gem 'hogwarts'
+Click the green Clone or Download button.
+
+Click the clipboard icon to copy the remote URL.
+
+In terminal, type the command
 ```
+git clone git@github.com:LizLaffitte/hogwarts.git
 
-And then execute:
+```
+Use the cd command in the terminal to open the hogwarts directory
 
-    $ bundle
+```
+cd hogwarts
 
-Or install it yourself as:
-
-    $ gem install hogwarts
+```
 
 ## Usage
 
