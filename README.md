@@ -21,10 +21,15 @@ Use the cd command in the terminal to open the hogwarts directory
 cd hogwarts
 
 ```
+Install the dependencies by typing this command into the terminal:
+
+```
+bundle install
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+To run the Hogwarts CLI gem, typw
 
 ## Development
 
