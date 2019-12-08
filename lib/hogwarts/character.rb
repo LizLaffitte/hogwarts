@@ -1,5 +1,5 @@
 class Character
-    attr_accessor :name, :patronus, :wand, :boggart, :house, :role
+    attr_accessor :name, :patronus, :wand, :boggart, :house, :role, :species
     @@all = []
     @@students = []
 
