@@ -16,9 +16,11 @@ class Api
     end
 
     def character(id)
-        char_hash = HTTParty.get(@@base_route + "characters/" + id + "/?" + @@token)
-        Character.new(char_hash)
+        orig_char_hash = HTTParty.get(@@base_route + "characters/" + id + "/?" + @@token)
+        new_char_hash = orig_char_hash.to_h.slice("role", "boggart", "wand", "name", "patronus")  
+        if new_char_hash["role"] == "student"
+            Character.new(new_char_hash)
+        end
     end
-
 
 end

@@ -67,7 +67,7 @@ class CLI
                 break
             elsif house_index < House.all.length && house_index > -1
                 house = House.all.sort_by(&:name)[house_index]
-                house.list_house_info
+                house.house_info
             elsif user_input != "back"
                 puts "Have you been confunded? Try again."
             end

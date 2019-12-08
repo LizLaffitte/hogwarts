@@ -19,8 +19,8 @@ class House
         all.find {|house| house.name == house_name}
     end
 
-    def list_house_info
-        puts "The House of #{self.name}:"
+    def house_info
+        puts "#{self.name}:"
         puts "Head of House: #{self.headOfHouse}"
         puts "Founder: #{self.founder}"
         puts "Mascot: #{self.mascot.capitalize}"
@@ -33,15 +33,17 @@ class House
 
     def add_characters
         @character_api_call = Api.new
-        self.members.first(10).each do |char_id|
+        self.members.each do |char_id|
             character = @character_api_call.character(char_id)
-            character.house = self
-            self.characters << character
+            if character != nil
+                character.house = self
+                self.characters << character    
+            end
         end
     end
 
     def print_character_list
-        self.characters.each.with_index(1) do |char_obj, value|
+        self.characters.first(10).each.with_index(1) do |char_obj, value|
             puts "#{value}. #{char_obj.name}"
         end
     end
