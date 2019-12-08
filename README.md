@@ -27,7 +27,7 @@ bundle install
 
 To run the Hogwarts CLI gem, type the following command: 
 ```
-bin/run
+./bin/run
 ```
 You can now follow the prompts to be sorted into a house, and learn more about all of Hogwart's houses and your fellow classmates. 
 
