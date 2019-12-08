@@ -36,9 +36,8 @@ class CLI
             when "exit"
                 break
             else
-                puts "Have you been confunded? Try again."
+                error_message
             end
-            
         end
     end
 
@@ -55,7 +54,7 @@ class CLI
 
     def houses_menu_options
         user_input = nil
-        while user_input != "back"
+        until user_input == "back"
             puts "You are currently in the House Directory. Where to now, wizard?"
             puts "Enter a house's number (1-4) to learn more about it,"
             puts "enter 'back' to go back,"
@@ -69,7 +68,7 @@ class CLI
                 house = House.all.sort_by(&:name)[house_index]
                 house.house_info
             elsif user_input != "back"
-                puts "Have you been confunded? Try again."
+               error_message
             end
         end
     end
@@ -82,7 +81,7 @@ class CLI
 
     def student_menu_options
         student_menu_input = nil
-        while student_menu_input != "back"
+        until student_menu_input == "back"
             puts "You are currently in the Student Directory. Where to now, wizard? "
             puts "Enter a student's number (1-10) to learn more about them,"
             puts "enter 'back' to go back,"
@@ -95,11 +94,15 @@ class CLI
             elsif student_index < @random_students.length && student_index > -1
                 student = @random_students.sort_by(&:name)[student_index]
                 student.character_info
-            elsif student_index != "back"
-                puts "Have you been confunded? Try again."
+            elsif student_menu_input != "back"
+                error_message
             end
         end
 
+    end
+
+    def error_message
+        puts "Have you been confunded? Try again."
     end
 
 end
